@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Портфолио начинающего веб-разработчика">
+    <title>Бадмаева Инесса— </title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- ШАПКА -->
+    <header>
+        <button id="theme-toggle" title="Сменить тему">🌙</button>
+        <nav>
+            <a href="#about">Обо мне</a>
+            <a href="#skills">Навыки</a>
+            <a href="#contacts">Контакты</a>
+        </nav>
+        <h1>Бадмаева Инесса</h1>
+        <p>хз кто</p>
+    </header>
+
+    <main>
+        <!-- ОБО МНЕ -->
+        <section id="about">
+            <img src="дин.jpg" alt="Фото Ивана Иванова" width="160" height="160">
+            <div>
+                <h2>Обо мне</h2>
+                <p>учусь на программиста, пока плохо</p>
+            </div>
+        </section>
+
+        <!-- НАВЫКИ -->
+        <section id="skills">
+            <h2>Навыки</h2>
+            <ul>
+                <li>Лежать</li>
+                <li>Cмотреть тик-токи</li>
+                <li>Есть</li>
+                <li>Спать</li>
+            </ul>
+        </section>
+
+       
+
+        <!-- КОНТАКТЫ -->
+        <section id="contacts">
+            <h2>Связаться со мной</h2>
+            <form action="#" method="POST">
+                <label for="name">Имя</label>
+                <input type="text" id="name" name="name" placeholder="Как вас зовут?" required>
+
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="you@mail.ru" required>
+
+                <label for="msg">Сообщение</label>
+                <textarea id="msg" name="message" rows="4" placeholder="Ваше сообщение..." required></textarea>
+
+                <button type="submit">Отправить</button>
+            </form>
+            <p id="form-status" role="status"></p>
+        </section>
+    </main>
+
+    <!-- ПОДВАЛ -->
+    <footer>
+        <p>© <span id="year">2026</span> Иван Иванов. Проект на HTML + CSS + JS.</p>
+    </footer>
+
+    <!-- КНОПКА «НАВЕРХ» -->
+    <button id="to-top" title="Наверх">↑</button>
+
+    <!-- JAVASCRIPT (defer = выполнится после загрузки HTML) -->
+    <script src="js/script.js" defer></script>
+</body>
+</html>
