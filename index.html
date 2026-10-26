@@ -4,14 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Портфолио начинающего веб-разработчика">
-    <title>Бадмаева Инесса— </title>
+    <title>Бадмаева Инесса</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
     <!-- ШАПКА -->
     <header>
-        <button id="theme-toggle" title="Сменить тему">🌙</button>
+        <div class="header-controls">
+            <button id="read-aloud" type="button" title="Прочитать страницу вслух"
+                    aria-label="Прочитать страницу вслух" aria-pressed="false">🔊</button>
+            <button id="theme-toggle" type="button" title="Сменить тему"
+                    aria-label="Сменить тему">🌙</button>
+        </div>
         <nav>
             <a href="#about">Обо мне</a>
             <a href="#skills">Навыки</a>
@@ -24,7 +29,7 @@
     <main>
         <!-- ОБО МНЕ -->
         <section id="about">
-            <img src="дин.jpg" alt="Фото Ивана Иванова" width="160" height="160">
+            <img src="дин.jpg" alt="Фото Бадмаевой Инессы" width="160" height="160">
             <div>
                 <h2>Обо мне</h2>
                 <p>учусь на программиста, пока плохо</p>
@@ -36,13 +41,11 @@
             <h2>Навыки</h2>
             <ul>
                 <li>Лежать</li>
-                <li>Cмотреть тик-токи</li>
+                <li>Смотреть тик-токи</li>
                 <li>Есть</li>
                 <li>Спать</li>
             </ul>
         </section>
-
-       
 
         <!-- КОНТАКТЫ -->
         <section id="contacts">
@@ -65,7 +68,7 @@
 
     <!-- ПОДВАЛ -->
     <footer>
-        <p>© <span id="year">2026</span> Иван Иванов. Проект на HTML + CSS + JS.</p>
+        <p>© <span id="year">2026</span> Бадмаева Инесса. Проект на HTML + CSS + JS.</p>
     </footer>
 
     <!-- КНОПКА «НАВЕРХ» -->

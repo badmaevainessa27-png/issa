@@ -39,7 +39,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* ============ 1. ШАПКА И НАВИГАЦИЯ ============ */
 header {
-    position: relative;             /* чтобы позиционировать кнопку темы */
+    position: relative;             /* чтобы позиционировать кнопки */
     background: linear-gradient(135deg, #667eea, #764ba2);
     color: #fff;
     text-align: center;
@@ -69,11 +69,16 @@ nav a {
 
 nav a:hover { color: var(--color-accent); }
 
-/* Кнопка смены темы в углу шапки */
-#theme-toggle {
+/* --- Кнопки в шапке: тема + озвучка --- */
+.header-controls {
     position: absolute;
     top: 16px;
     right: 16px;
+    display: flex;
+    gap: 12px;
+}
+
+.header-controls button {
     width: 44px;
     height: 44px;
     background: rgba(255, 255, 255, 0.2);
@@ -82,9 +87,24 @@ nav a:hover { color: var(--color-accent); }
     font-size: 20px;
     cursor: pointer;
     transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
 }
 
-#theme-toggle:hover { background: rgba(255, 255, 255, 0.35); }
+.header-controls button:hover { background: rgba(255, 255, 255, 0.35); }
+
+/* Пульсация во время озвучки */
+#read-aloud.speaking {
+    background: rgba(255, 215, 0, 0.45);
+    animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.6); }
+    50%      { box-shadow: 0 0 0 8px rgba(255, 215, 0, 0); }
+}
 
 /* ============ 2. ОСНОВНОЙ КОНТЕНТ ============ */
 main {
@@ -194,7 +214,7 @@ textarea:invalid:not(:placeholder-shown) {
     border-color: #e53e3e;
 }
 
-button {
+form button {
     background: var(--color-main);
     color: #fff;
     border: none;
@@ -206,7 +226,7 @@ button {
     transition: background 0.2s;
 }
 
-button:hover { background: var(--color-main-dark); }
+form button:hover { background: var(--color-main-dark); }
 
 /* Сообщение об успешной отправке (показывается через класс .visible из JS) */
 #form-status {
@@ -264,4 +284,7 @@ footer {
     nav { gap: 14px; font-size: 0.9rem; }
     #about { flex-direction: column; text-align: center; }
     section { margin: 40px 0; }
+
+    .header-controls { top: 10px; right: 10px; gap: 8px; }
+    .header-controls button { width: 38px; height: 38px; font-size: 18px; }
 }
