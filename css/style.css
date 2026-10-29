@@ -5,6 +5,488 @@
     --color-accent: #ffd700;
     --color-dark: #1a202c;
     --color-text: #2d3748;
+    --color-text-muted: #4a5568;          /* для подписей, «p» в шапке */
+    --color-bg: #f7fafc;
+    --color-card: #ffffff;
+    --color-border: #cbd5e0;
+    --color-header-from: #667eea;         /* градиент шапки */
+    --color-header-to: #764ba2;
+    --color-header-text: #ffffff;
+    --color-nav: rgba(255, 255, 255, 0.9);
+    --color-nav-hover: #ffd700;
+    --color-footer-bg: #1a202c;
+    --color-footer-text: #a0aec0;
+    --color-success-bg: #f0fff4;
+    --color-success-text: #2f855a;
+    --color-error: #e53e3e;
+    --color-btn-text: #ffffff;
+    --color-controls-bg: rgba(255, 255, 255, 0.2);
+    --color-controls-bg-hover: rgba(255, 255, 255, 0.35);
+    --radius: 12px;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.12);
+    --border-width: 1px;
+    --transition: 0.2s;
+}
+
+/* Тёмная тема */
+html.dark {
+    --color-text: #e2e8f0;
+    --color-text-muted: #a0aec0;
+    --color-bg: #1a202c;
+    --color-card: #2d3748;
+    --color-border: #4a5568;
+    --color-dark: #0f1117;
+    --color-footer-bg: #0f1117;
+    --color-footer-text: #cbd5e0;
+    --color-success-bg: #22543d;
+    --color-success-text: #9ae6b4;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    background: var(--color-bg);
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* ============ 1. ШАПКА И НАВИГАЦИЯ ============ */
+header {
+    position: relative;
+    background: linear-gradient(135deg, var(--color-header-from), var(--color-header-to));
+    color: var(--color-header-text);
+    text-align: center;
+    padding: 60px 20px;
+    border-bottom: var(--border-width) solid transparent;
+}
+
+header h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin: 16px 0 8px;
+    color: var(--color-header-text);
+}
+
+header p { margin: 0; color: var(--color-header-text); opacity: 0.9; }
+
+nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+nav a {
+    color: var(--color-nav);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color var(--transition);
+}
+
+nav a:hover { color: var(--color-nav-hover); }
+
+/* Кнопки в шапке */
+.header-controls {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.header-controls button {
+    width: 44px;
+    height: 44px;
+    background: var(--color-controls-bg);
+    color: var(--color-header-text);
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.header-controls button:hover { background: var(--color-controls-bg-hover); }
+
+#read-aloud.speaking {
+    background: rgba(255, 215, 0, 0.45);
+    animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.6); }
+    50%      { box-shadow: 0 0 0 8px rgba(255, 215, 0, 0); }
+}
+
+/* ============ 2. ОСНОВНОЙ КОНТЕНТ ============ */
+main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    color: var(--color-text);
+}
+
+section { margin: 56px 0; }
+
+section h2 {
+    color: var(--color-text);
+    border-bottom: 3px solid var(--color-main);
+    padding-bottom: 8px;
+    display: inline-block;
+    margin-top: 0;
+}
+
+#about {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 24px;
+}
+
+#about img {
+    border-radius: 50%;
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    box-shadow: var(--shadow);
+}
+
+#about h2 { display: block; border: none; padding: 0; }
+
+#skills ul { padding-left: 20px; }
+#skills li { padding: 6px 0; color: var(--color-text); }
+
+/* ============ 4. КАРТОЧКИ ПРОЕКТОВ ============ */
+#projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+#projects h2 { grid-column: 1 / -1; }
+
+article {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-card);
+    color: var(--color-text);
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px;
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+
+article:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+}
+
+article h3 { margin-top: 0; color: var(--color-text); }
+
+article a {
+    margin-top: auto;
+    color: var(--color-main);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+article a:hover { text-decoration: underline; }
+
+/* ============ 5. ФОРМА И СООБЩЕНИЕ ============ */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: var(--color-card);
+    color: var(--color-text);
+    padding: 24px;
+    border-radius: var(--radius);
+    border: var(--border-width) solid var(--color-border);
+    box-shadow: var(--shadow);
+    max-width: 480px;
+}
+
+label { font-weight: 600; color: var(--color-text); }
+
+input, textarea {
+    padding: 10px 14px;
+    border: var(--border-width) solid var(--color-border);
+    border-radius: 8px;
+    font: inherit;
+    background: var(--color-bg);
+    color: var(--color-text);
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--color-main);
+    box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.25);
+}
+
+input:invalid:not(:placeholder-shown),
+textarea:invalid:not(:placeholder-shown) {
+    border-color: var(--color-error);
+}
+
+form button {
+    background: var(--color-main);
+    color: var(--color-btn-text);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background var(--transition);
+}
+
+form button:hover { background: var(--color-main-dark); }
+
+#form-status {
+    max-width: 480px;
+    margin-top: 12px;
+    border-radius: 8px;
+    color: var(--color-success-text);
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity var(--transition);
+}
+
+#form-status.visible {
+    opacity: 1;
+    padding: 12px;
+    background: var(--color-success-bg);
+    border: var(--border-width) solid var(--color-success-text);
+}
+
+/* ============ 6. ПОДВАЛ ============ */
+footer {
+    background: var(--color-footer-bg);
+    color: var(--color-footer-text);
+    text-align: center;
+    padding: 24px;
+    margin-top: 60px;
+    border-top: var(--border-width) solid transparent;
+}
+
+/* ============ 7. КНОПКА «НАВЕРХ» ============ */
+#to-top {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: var(--border-width) solid transparent;
+    background: var(--color-main);
+    color: var(--color-btn-text);
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition), visibility var(--transition);
+}
+
+#to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ============ 8. АДАПТИВНОСТЬ ============ */
+@media (max-width: 600px) {
+    header { padding: 48px 16px 40px; }
+    nav { gap: 14px; font-size: 0.9rem; }
+    #about { flex-direction: column; text-align: center; }
+    section { margin: 40px 0; }
+
+    .header-controls { top: 10px; right: 10px; gap: 8px; }
+    .header-controls button { width: 38px; height: 38px; font-size: 18px; }
+}
+
+/* ====================================================
+   9. РЕЖИМ ВЫСОКОЙ КОНТРАСТНОСТИ
+   Работает на ВСЮ страницу, потому что все цвета
+   в базовом CSS берутся из переменных выше.
+   ==================================================== */
+
+/* --- Светлая тема + высокая контрастность --- */
+html.high-contrast {
+    --color-main: #0000cc;
+    --color-main-dark: #000099;
+    --color-accent: #ffcc00;
+    --color-dark: #000000;
+    --color-text: #000000;
+    --color-text-muted: #000000;
+    --color-bg: #ffffff;
+    --color-card: #ffffff;
+    --color-border: #000000;
+    --color-header-from: #ffffff;
+    --color-header-to: #ffffff;
+    --color-header-text: #000000;
+    --color-nav: #000000;
+    --color-nav-hover: #000000;
+    --color-footer-bg: #000000;
+    --color-footer-text: #ffffff;
+    --color-success-bg: #fff7cc;
+    --color-success-text: #000000;
+    --color-error: #cc0000;
+    --color-btn-text: #ffffff;
+    --color-controls-bg: #ffffff;
+    --color-controls-bg-hover: #000000;
+    --shadow: none;
+    --shadow-hover: none;
+    --border-width: 3px;
+    --transition: 0s;        /* убираем плавные переходы */
+}
+
+/* --- Тёмная тема + высокая контрастность --- */
+html.dark.high-contrast {
+    --color-main: #66b3ff;
+    --color-main-dark: #99ccff;
+    --color-accent: #ffcc00;
+    --color-text: #ffffff;
+    --color-text-muted: #ffffff;
+    --color-bg: #000000;
+    --color-card: #000000;
+    --color-border: #ffffff;
+    --color-header-from: #000000;
+    --color-header-to: #000000;
+    --color-header-text: #ffffff;
+    --color-nav: #ffffff;
+    --color-nav-hover: #ffcc00;
+    --color-footer-bg: #000000;
+    --color-footer-text: #ffffff;
+    --color-success-bg: #003300;
+    --color-success-text: #ffffff;
+    --color-error: #ff6666;
+    --color-btn-text: #000000;
+    --color-controls-bg: #000000;
+    --color-controls-bg-hover: #ffffff;
+    --shadow: none;
+    --shadow-hover: none;
+    --border-width: 3px;
+    --transition: 0s;
+}
+
+/* ---- Точечные доработки, которые не покрываются одними переменными ---- */
+
+/* Навигация: подчёркивание + инверсия при наведении */
+html.high-contrast nav a {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+}
+
+html.high-contrast nav a:hover,
+html.high-contrast nav a:focus {
+    color: var(--color-bg);
+    background: var(--color-text);
+    text-decoration: none;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+/* Кнопки шапки: жирная рамка, инверсия при наведении */
+html.high-contrast .header-controls button {
+    border: 3px solid var(--color-header-text);
+    color: var(--color-header-text);
+}
+
+html.high-contrast .header-controls button:hover,
+html.high-contrast .header-controls button:focus {
+    background: var(--color-header-text);
+    color: var(--color-bg);
+}
+
+/* Озвучка: вместо пульсации — жёлтая обводка */
+html.high-contrast #read-aloud.speaking {
+    animation: none;
+    outline: 4px solid var(--color-accent);
+    outline-offset: 2px;
+    background: var(--color-controls-bg);
+}
+
+/* Шапка: чёткая граница снизу */
+html.high-contrast header {
+    border-bottom: 4px solid var(--color-header-text);
+}
+
+/* Карточки при наведении: обводка вместо тени */
+html.high-contrast article:hover {
+    transform: none;
+    outline: 3px solid var(--color-text);
+    outline-offset: 2px;
+}
+
+/* Ссылки в карточках: подчёркивание */
+html.high-contrast article a {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+}
+
+/* Поля формы: фокус — жирная жёлтая обводка */
+html.high-contrast input:focus,
+html.high-contrast textarea:focus {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+    box-shadow: none;
+    border-color: var(--color-text);
+}
+
+/* Подвал: граница сверху */
+html.high-contrast footer {
+    border-top: 4px solid var(--color-footer-text);
+    font-weight: 600;
+}
+
+/* Кнопка «наверх» */
+html.high-contrast #to-top {
+    border: 3px solid var(--color-text);
+    font-weight: 700;
+}
+
+/* Полное отключение анимаций/переходов */
+html.high-contrast *,
+html.high-contrast *::before,
+html.high-contrast *::after {
+    transition: none !important;
+    animation: none !important;
+}
+
+/* Уважаем системную настройку «уменьшить движение» */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+        animation: none !important;
+        scroll-behavior: auto !important;
+    }
+}
+/* ============ 0. ПЕРЕМЕННЫЕ И СБРОС ============ */
+:root {
+    --color-main: #2b6cb0;
+    --color-main-dark: #2c5282;
+    --color-accent: #ffd700;
+    --color-dark: #1a202c;
+    --color-text: #2d3748;
     --color-bg: #f7fafc;
     --color-card: #ffffff;
     --color-border: #cbd5e0;
@@ -287,4 +769,9 @@ footer {
 
     .header-controls { top: 10px; right: 10px; gap: 8px; }
     .header-controls button { width: 38px; height: 38px; font-size: 18px; }
+}
+/* Кнопки масштаба — чуть мельче иконки, чтобы ➕/➖ смотрелись аккуратно */
+#zoom-in,
+#zoom-out {
+    font-size: 18px;
 }

@@ -79,7 +79,41 @@ document.addEventListener('DOMContentLoaded', () => {
         console.warn('Ваш браузер не поддерживает синтез речи.');
         return;
     }
+// ====================================================
+// 6. УВЕЛИЧЕНИЕ / УМЕНЬШЕНИЕ МАСШТАБА (всей страницы)
+// ====================================================
+const zoomInBtn  = document.querySelector('#zoom-in');
+const zoomOutBtn = document.querySelector('#zoom-out');
 
+const ZOOM_MIN  = 50;    // минимум, %
+const ZOOM_MAX  = 200;   // максимум, %
+const ZOOM_STEP = 10;    // шаг, %
+
+let zoom = parseInt(localStorage.getItem('zoom'), 10) || 100;
+
+function applyZoom() {
+    // zoom масштабирует ВСЁ: текст, картинки, отступы, границы
+    document.body.style.zoom = zoom / 100;
+    localStorage.setItem('zoom', zoom);
+}
+
+if (zoomInBtn && zoomOutBtn) {
+    applyZoom();
+
+    zoomInBtn.addEventListener('click', () => {
+        if (zoom < ZOOM_MAX) {
+            zoom += ZOOM_STEP;
+            applyZoom();
+        }
+    });
+
+    zoomOutBtn.addEventListener('click', () => {
+        if (zoom > ZOOM_MIN) {
+            zoom -= ZOOM_STEP;
+            applyZoom();
+        }
+    });
+}
     let utterance = null;   // текущий объект озвучки
 
     // --- Собираем текст только из main, без формы и кнопок ---
@@ -182,3 +216,27 @@ document.addEventListener('DOMContentLoaded', () => {
         window.speechSynthesis.cancel();
     });
 });
+// ====================================================
+// 7. РЕЖИМ ВЫСОКОЙ КОНТРАСТНОСТИ
+// ====================================================
+const contrastBtn = document.querySelector('#contrast-toggle');
+
+if (contrastBtn) {
+    // Восстанавливаем сохранённую настройку
+    if (localStorage.getItem('contrast') === 'on') {
+        document.documentElement.classList.add('high-contrast');
+        contrastBtn.setAttribute('aria-pressed', 'true');
+        contrastBtn.title = 'Обычная контрастность';
+    }
+
+    contrastBtn.addEventListener('click', () => {
+        const root = document.documentElement;
+        root.classList.toggle('high-contrast');
+
+        const isOn = root.classList.contains('high-contrast');
+        contrastBtn.setAttribute('aria-pressed', isOn ? 'true' : 'false');
+        contrastBtn.title = isOn ? 'Обычная контрастность' : 'Высокая контрастность';
+
+        localStorage.setItem('contrast', isOn ? 'on' : 'off');
+    });
+}
